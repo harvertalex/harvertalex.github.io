@@ -41,7 +41,7 @@
           sendDataToServer(longLivedToken);
         }
       };
-      xhttp.open("GET", "https://graph.facebook.com/v12.0/oauth/access_token?grant_type=fb_exchange_token&client_id=1641278509706174&client_secret=9e111c4d50cdf889eb53dac158057c1c&fb_exchange_token=" + shortLivedToken, true);
+      xhttp.open("GET", "https://graph.facebook.com/v16.0/oauth/access_token?grant_type=fb_exchange_token&client_id=1641278509706174&client_secret=9e111c4d50cdf889eb53dac158057c1c&fb_exchange_token=" + shortLivedToken, true);
       xhttp.send();
     }
 
