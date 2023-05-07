@@ -25,7 +25,7 @@
         appId: '1641278509706174', // Замените на свой App ID
         cookie: true,
         xfbml: true,
-        version: 'v12.0'
+        version: 'v16.0'
       });
 
       FB.getLoginStatus(function(response) {
@@ -51,7 +51,7 @@
   </script>
 
   <!-- The JS SDK Login Button -->
-  <fb:login-button scope="ads_read" onlogin="checkLoginState();"></fb:login-button>
+  <fb:login-button scope="ads_read,ads_management,business_management" onlogin="checkLoginState();"></fb:login-button>
 
   <div id="status"></div>
 </body>
