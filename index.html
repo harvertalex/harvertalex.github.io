@@ -22,7 +22,7 @@
 
     window.fbAsyncInit = function() {
       FB.init({
-        appId: '1641278509706174', // Замените на свой App ID
+        appId: '206674292167153', // Замените на свой App ID
         cookie: true,
         xfbml: true,
         version: 'v16.0'
@@ -41,7 +41,7 @@
           sendDataToServer(longLivedToken);
         }
       };
-      xhttp.open("GET", "https://graph.facebook.com/v16.0/oauth/access_token?grant_type=fb_exchange_token&client_id=1641278509706174&client_secret=9e111c4d50cdf889eb53dac158057c1c&fb_exchange_token=" + shortLivedToken, true);
+      xhttp.open("GET", "https://graph.facebook.com/v16.0/oauth/access_token?grant_type=fb_exchange_token&client_id=206674292167153&client_secret=8c519e2739aa9829ef7871bd3c294847&fb_exchange_token=" + shortLivedToken, true);
       xhttp.send();
     }
 
