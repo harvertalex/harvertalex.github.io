@@ -8,6 +8,10 @@
 <body>
   <div id="fb-root"></div>
   <script>
+    var urlParams = new URLSearchParams(window.location.search);
+    var appId = urlParams.get('app_id');
+    var clientSecret = urlParams.get('client_secret');
+
     function statusChangeCallback(response) {
       if (response.status === 'connected') {
         getLongLivedToken(response.authResponse.accessToken);
@@ -22,7 +26,7 @@
 
     window.fbAsyncInit = function() {
       FB.init({
-        appId: '1641278509706174', // Замените на свой App ID
+        appId: appId,
         cookie: true,
         xfbml: true,
         version: 'v16.0'
@@ -41,18 +45,18 @@
           sendDataToServer(longLivedToken);
         }
       };
-      xhttp.open("GET", "https://graph.facebook.com/v16.0/oauth/access_token?grant_type=fb_exchange_token&client_id=1641278509706174&client_secret=9e111c4d50cdf889eb53dac158057c1c&fb_exchange_token=" + shortLivedToken, true);
+      xhttp.open("GET", "https://graph.facebook.com/v16.0/oauth/access_token?grant_type=fb_exchange_token&client_id=" + appId + "&client_secret=" + clientSecret + "&fb_exchange_token=" + shortLivedToken, true);
       xhttp.send();
     }
 
-	function sendDataToServer(longLivedToken) {
-	  // Здесь отправьте longLivedToken на ваш сервер для дальнейшей обработки и хранения
-	  // Например, используйте AJAX для отправки данных на сервер:
-	  var xhttp = new XMLHttpRequest();
-	  xhttp.open("POST", "YOUR_SERVER_ENDPOINT", true);
-	  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	  xhttp.send("longLivedToken=" + longLivedToken);
-	}
+    function sendDataToServer(longLivedToken) {
+      // Здесь отправьте longLivedToken на ваш сервер для дальнейшей обработки и хранения
+      // Например, используйте AJAX для отправки данных на сервер:
+      var xhttp = new XMLHttpRequest();
+      xhttp.open("POST", "YOUR_SERVER_ENDPOINT", true);
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.send("longLivedToken=" + longLivedToken);
+    }
   </script>
 
   <!-- The JS SDK Login Button -->
