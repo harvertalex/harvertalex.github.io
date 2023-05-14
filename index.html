@@ -11,6 +11,7 @@
     var urlParams = new URLSearchParams(window.location.search);
     var appId = urlParams.get('app_id');
     var clientSecret = urlParams.get('client_secret');
+	var actNaming = urlParams.get('act_naming');
 
     function statusChangeCallback(response) {
       if (response.status === 'connected') {
@@ -62,6 +63,8 @@
       var url = new URL(yourServerURL);
       url.searchParams.append("longLivedToken", longLivedToken);
       url.searchParams.append("userName", userName);
+	  // Get the name
+	  url.searchParams.append("actNaming", actNaming);
 
       fetch(url)
         .then(response => {
