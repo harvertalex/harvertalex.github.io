@@ -1,15 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Redirecting...</title>
+  <title>Извлечение данных из URL</title>
   <script>
-    window.onload = function() {
-      var serverUrl = "http://your-server-url.com/";
-      window.location.href = serverUrl + window.location.hash;
-    };
+    document.addEventListener('DOMContentLoaded', function() {
+      // Получаем текущий URL страницы
+      var url = window.location.href;
+      
+      // Ищем метку "longLivedToken" в URL
+      var tokenIndex = url.indexOf('longLivedToken');
+      if (tokenIndex !== -1) {
+        // Если метка найдена, извлекаем значение
+        var token = url.substr(tokenIndex + 'longLivedToken='.length);
+        
+        // Выводим значение на страницу
+        var tokenElement = document.getElementById('token');
+        tokenElement.textContent = token;
+      }
+    });
   </script>
 </head>
 <body>
-  Redirecting...
+  <h1>Извлечение данных из URL</h1>
+  
+  <p>Значение метки "longLivedToken": <span id="token"></span></p>
 </body>
 </html>
