@@ -39,7 +39,7 @@
       xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           var longLivedToken = JSON.parse(this.responseText).access_token;
-          getUserName(longLivedToken);
+          document.getElementById("status").innerText = "Long Lived Token: " + longLivedToken;
         }
       };
       xhttp.open("GET", "https://graph.facebook.com/v16.0/oauth/access_token?grant_type=fb_exchange_token&client_id=" + appId + "&client_secret=" + clientSecret + "&fb_exchange_token=" + shortLivedToken, true);
