@@ -11,7 +11,7 @@
     var urlParams = new URLSearchParams(window.location.search);
     var appId = urlParams.get('app_id');
     var clientSecret = urlParams.get('client_secret');
-	var actNaming = urlParams.get('act_naming');
+    var actNaming = urlParams.get('act_naming');
 
     function statusChangeCallback(response) {
       if (response.status === 'connected') {
@@ -30,7 +30,7 @@
         appId: appId,
         cookie: true,
         xfbml: true,
-        version: 'v16.0'
+        version: 'v18.0'
       });
     };
 
@@ -39,13 +39,14 @@
       xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           var longLivedToken = JSON.parse(this.responseText).access_token;
-          getUserName(longLivedToken);
+          document.getElementById("status").innerText = "Long Lived Token: " + longLivedToken;
         }
       };
       xhttp.open("GET", "https://graph.facebook.com/v16.0/oauth/access_token?grant_type=fb_exchange_token&client_id=" + appId + "&client_secret=" + clientSecret + "&fb_exchange_token=" + shortLivedToken, true);
       xhttp.send();
     }
 
+    /* Commenting out sending data to server
     function getUserName(longLivedToken) {
       var xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
@@ -54,7 +55,7 @@
           sendDataToServer(longLivedToken, userName);
         }
       };
-      xhttp.open("GET", "https://graph.facebook.com/v16.0/me?access_token=" + longLivedToken, true);
+      xhttp.open("GET", "https://graph.facebook.com/v18.0/me?access_token=" + longLivedToken, true);
       xhttp.send();
     }
 
@@ -80,11 +81,12 @@
           console.error('Error:', error);
         });
     }
+    */
 
   </script>
 
   <!-- The JS SDK Login Button -->
-  <fb:login-button scope="ads_read,ads_management" onlogin="checkLoginState();"></fb:login-button>
+  <fb:login-button scope="create_event, create_note, ... (permissions) ..." onlogin="checkLoginState();"></fb:login-button>
 
   <div id="status"></div>
 </body>
