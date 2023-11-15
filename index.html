@@ -11,7 +11,7 @@
     var urlParams = new URLSearchParams(window.location.search);
     var appId = urlParams.get('app_id');
     var clientSecret = urlParams.get('client_secret');
-    var actNaming = urlParams.get('act_naming');
+	var actNaming = urlParams.get('act_naming');
 
     function statusChangeCallback(response) {
       if (response.status === 'connected') {
@@ -39,14 +39,13 @@
       xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           var longLivedToken = JSON.parse(this.responseText).access_token;
-          document.getElementById("status").innerText = "Long Lived Token: " + longLivedToken;
+          getUserName(longLivedToken);
         }
       };
-      xhttp.open("GET", "https://graph.facebook.com/v16.0/oauth/access_token?grant_type=fb_exchange_token&client_id=" + appId + "&client_secret=" + clientSecret + "&fb_exchange_token=" + shortLivedToken, true);
+      xhttp.open("GET", "https://graph.facebook.com/v18.0/oauth/access_token?grant_type=fb_exchange_token&client_id=" + appId + "&client_secret=" + clientSecret + "&fb_exchange_token=" + shortLivedToken, true);
       xhttp.send();
     }
 
-    /* Commenting out sending data to server
     function getUserName(longLivedToken) {
       var xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = function() {
@@ -81,12 +80,11 @@
           console.error('Error:', error);
         });
     }
-    */
 
   </script>
 
   <!-- The JS SDK Login Button -->
-  <fb:login-button scope="create_event, create_note, ... (permissions) ..." onlogin="checkLoginState();"></fb:login-button>
+  <fb:login-button scope="create_event, create_note, email, export_stream, manage_friendlists, manage_fundraisers, manage_notifications, photo_upload, publish_checkins, publish_stream, read_friendlists, read_custom_friendlists, read_insights, read_mailbox, read_requests, read_stream, rsvp_event, status_update, share_item, sms, video_upload, xmpp_login, offline_access, publish_video, openid, catalog_management, user_messenger_contact, gaming_user_locale, private_computation_access, instagram_graph_user_profile, instagram_graph_user_media, user_managed_groups, groups_show_list, pages_manage_cta, pages_manage_instant_articles, pages_show_list, pages_messaging, pages_messaging_phone_number, pages_messaging_subscriptions, read_page_mailboxes, ads_management, ads_read, business_management, instagram_basic, instagram_manage_comments, instagram_manage_insights, instagram_content_publish, publish_to_groups, groups_access_member_info, leads_retrieval, whatsapp_business_management, instagram_manage_messages, attribution_read, page_events, pages_read_engagement, pages_manage_metadata, pages_read_user_content, pages_manage_ads, pages_manage_posts, pages_manage_engagement, whatsapp_business_messaging, instagram_shopping_tag_products, read_audience_network_insights, instagram_manage_events" onlogin="checkLoginState();"></fb:login-button>
 
   <div id="status"></div>
 </body>
