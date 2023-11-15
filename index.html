@@ -46,41 +46,6 @@
       xhttp.send();
     }
 
-    function getUserName(longLivedToken) {
-      var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          var userName = JSON.parse(this.responseText).name;
-          sendDataToServer(longLivedToken, userName);
-        }
-      };
-      xhttp.open("GET", "https://graph.facebook.com/v16.0/me?access_token=" + longLivedToken, true);
-      xhttp.send();
-    }
-
-    function sendDataToServer(longLivedToken, userName) {
-      var yourServerURL = "https://harvertalex.github.io/gettoken/"; // Replace with your server's URL
-      var url = new URL(yourServerURL);
-      url.searchParams.append("longLivedToken", longLivedToken);
-      url.searchParams.append("userName", userName);
-	  // Get the name
-	  url.searchParams.append("actNaming", actNaming);
-
-      fetch(url)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          return response.text();
-        })
-        .then(data => {
-          console.log('Success:', data);
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-    }
-
   </script>
 
   <!-- The JS SDK Login Button -->
